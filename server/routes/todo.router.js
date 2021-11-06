@@ -15,4 +15,6 @@ module.exports = function (app) {
   app.get("/api/todo/:id", controller.show);
   app.put("/api/todo/:id", controller.update);
   app.delete("/api/todo/:id", controller.delete);
+    app.get("/api/todo", controller.all);
+
 };

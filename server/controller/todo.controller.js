@@ -1,6 +1,22 @@
 //Import todo Model
 Todo = require("../model/todo.model");
 
+// Show All todos
+exports.all = function (req, res) {
+  Todo.get(function (err, todo) {
+    if (err)
+      res.json({
+        status: "error",
+        message: err,
+      });
+    res.json({
+      status: "success",
+      message: "Got Todo Successfully!",
+      data: todo,
+    });
+  });
+};
+
 // For creating new Todo
 exports.add = async (req, res) => {
   var todo = new Todo();
