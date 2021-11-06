@@ -1,15 +1,11 @@
 import React, { Component } from "react";
-import ReactTable from "react-table-6";
+// import ReactTable from "react-table-6";
 import api from "../api";
 
 import styled from "styled-components";
 
-import "react-table-6/react-table.css";
-
-const Wrapper = styled.div`
-  padding: 0 40px 40px 40px;
-  margin: 50px;
-`;
+// import "react-table-6/react-table.css";
+import { DataGrid } from "@material-ui/data-grid";
 
 const Update = styled.div`
   color: #ef9b0f;
@@ -79,37 +75,39 @@ class TodosList extends Component {
 
     const columns = [
       {
-        Header: "ID",
-        accessor: "_id",
-        filterable: true,
+        headerName: "ID",
+        field: "_id",
+        width: 200,
       },
       {
-        Header: "Content",
-        accessor: "content",
-        filterable: true,
+        headerName: "Content",
+        field: "content",
+        width: 200,
       },
-      {
-        Header: "",
-        accessor: "",
-        Cell: function (props) {
-          return (
-            <span>
-              <DeleteTodo id={props.original._id} />
-            </span>
-          );
-        },
-      },
-      {
-        Header: "",
-        accessor: "",
-        Cell: function (props) {
-          return (
-            <span>
-              <UpdateTodo id={props.original._id} />
-            </span>
-          );
-        },
-      },
+      // {
+      //   headerName: "",
+      //   field: "Action",
+      //   width: 200,
+      //   valueGetter: (props) => {
+      //     return (
+      //       <span>
+      //         <DeleteTodo id={props._id} />
+      //       </span>
+      //     );
+      //   },
+      // },
+      // {
+      //   headerName: "",
+      //   field: "",
+      //   width: 200,
+      //   valueGetter: function (params) {
+      //     return (
+      //       <span>
+      //         <UpdateTodo id={params._id} />
+      //       </span>
+      //     );
+      //   },
+      // },
     ];
 
     let showTable = true;
@@ -118,18 +116,23 @@ class TodosList extends Component {
     }
 
     return (
-      <Wrapper>
-        {showTable && (
-          <ReactTable
-            data={todos}
-            columns={columns}
-            loading={isLoading}
-            defaultPageSize={10}
-            showPageSizeOptions={true}
-            minRows={0}
-          />
-        )}
-      </Wrapper>
+      <div
+        style={{
+          height: 400,
+          width: "100%",
+          padding: "0 40px 40px 40px",
+          margin: "50px",
+        }}
+      >
+        <DataGrid
+          rows={todos}
+          columns={columns}
+          pageSize={5}
+          rowsPerPageOptions={[5]}
+        >
+
+        </DataGrid>
+      </div>
     );
   }
 }

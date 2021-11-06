@@ -9,10 +9,23 @@ exports.all = function (req, res) {
         status: "error",
         message: err,
       });
+
+    var todoNew = [];
+    todo.forEach((e) => {
+      var temp = {
+        id: e.id,
+        _id: e._id,
+        content: e.content,
+        user_id: e.user_id,
+        created_at: e.created_at,
+      };
+      todoNew.push(temp);
+    });
+
     res.json({
       status: "success",
       message: "Got Todo Successfully!",
-      data: todo,
+      data: todoNew,
     });
   });
 };
